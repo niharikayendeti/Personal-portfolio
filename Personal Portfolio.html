@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name | Portfolio</title>
+  <style>
+    /* ========== GLOBAL ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #1e293b;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo span { color: #38bdf8; }
+    nav { display: flex; align-items: center; }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { color: #38bdf8; }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #38bdf8;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 0 1rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: #38bdf8; }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #94a3b8;
+    }
+
+    /* ========== BUTTON ========== */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #0ea5e9;
+      transform: translateY(-3px);
+    }
+
+    /* ========== SECTIONS ========== */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      color: #38bdf8;
+    }
+
+    /* ========== ABOUT ========== */
+    .about-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #38bdf8;
+    }
+    .about-container p {
+      max-width: 550px;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+    }
+
+    /* ========== SKILLS ========== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background: #1e293b;
+      padding: 1.2rem;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: 0.3s;
+      border: 1px solid #334155;
+    }
+    .skill-card:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      transform: translateY(-5px);
+    }
+
+    /* ========== PROJECTS ========== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: 0.3s;
+      border: 1px solid #334155;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(56,189,248,0.25);
+    }
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .project-card h3 {
+      padding: 1rem 1rem 0.3rem;
+      color: #38bdf8;
+    }
+    .project-card p {
+      padding: 0 1rem;
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    .project-card a {
+      display: inline-block;
+      padding: 1rem;
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .project-card a:hover { text-decoration: underline; }
+
+    /* ========== CONTACT ========== */
+    #contact-form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    #contact-form input,
+    #contact-form textarea {
+      padding: 1rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      outline: none;
+      font-family: inherit;
+    }
+    #contact-form input:focus,
+    #contact-form textarea:focus {
+      border-color: #38bdf8;
+    }
+    #form-status {
+      text-align: center;
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        right: 0;
+        background: #1e293b;
+        flex-direction: column;
+        width: 220px;
+        padding: 1.2rem;
+        display: none;
+        border-radius: 0 0 0 12px;
+      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Your<span>Name</span></div>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm <span>Your Name</span></h1>
+      <p>Web Developer • Designer • Problem Solver</p>
+      <a href="#contact" class="btn">Hire Me</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <div class="about-container">
+      <img src="https://via.placeholder.com/180" alt="Profile" class="profile-img" />
+      <p>
+        I'm a passionate developer who loves building clean, responsive websites
+        and solving real-world problems with code. Currently focused on
+        front-end development and always learning something new.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">HTML5</div>
+      <div class="skill-card">CSS3</div>
+      <div class="skill-card">JavaScript</div>
+      <div class="skill-card">React</div>
+      <div class="skill-card">Git & GitHub</div>
+      <div class="skill-card">Responsive Design</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://via.placeholder.com/300x180" alt="Project 1" />
+        <h3>Project One</h3>
+        <p>Short description of what this project does.</p>
+        <a href="#" target="_blank">Live Demo →</a>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/300x180" alt="Project 2" />
+        <h3>Project Two</h3>
+        <p>Short description of what this project does.</p>
+        <a href="#" target="_blank">Live Demo →</a>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/300x180" alt="Project 3" />
+        <h3>Project Three</h3>
+        <p>Short description of what this project does.</p>
+        <a href="#" target="_blank">Live Demo →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <form id="contact-form">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+      <p id="form-status"></p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>©️ 2025 Your Name. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ===== Mobile Menu Toggle =====
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+    });
+
+    // ===== Contact Form =====
+    const form = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        formStatus.style.color = "#ef4444";
+        formStatus.textContent = "Please fill all fields!";
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        formStatus.style.color = "#ef4444";
+        formStatus.textContent = "Please enter a valid email!";
+        return;
+      }
+
+      formStatus.style.color = "#22c55e";
+      formStatus.textContent = `Thanks ${name}! Your message has been sent. 🚀`;
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
